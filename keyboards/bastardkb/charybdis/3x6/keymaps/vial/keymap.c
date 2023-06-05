@@ -23,42 +23,6 @@ enum charybdis_keymap_layers {
     LAYER_POINTER,
 };
 
-// Tap Dance declarations
-enum {
-    TD_ESC_CAPS,
-    TD_T_LKB,
-    TD_Y_RKB,
-    TD_G_LKB,
-    TD_H_RKB,
-    TD_B_LKB,
-    TD_N_RKB,
-    TD_F_LKB,
-    TD_J_RKB,
-};
-
-// Tap Dance definitions
-tap_dance_action_t tap_dance_actions[] = {
-    // Tap once for Escape, twice for Caps Lock
-    [TD_ESC_CAPS] = ACTION_TAP_DANCE_DOUBLE(KC_ESC, KC_CAPS),
-    // Tap once for T, twice for {
-    [TD_T_LKB] = ACTION_TAP_DANCE_DOUBLE(KC_T, KC_LEFT_BRACKET),
-    // Tap once for T, twice for {
-    [TD_Y_RKB] = ACTION_TAP_DANCE_DOUBLE(KC_Y, KC_RIGHT_BRACKET),
-    // Tap once for T, twice for {
-    [TD_G_LKB] = ACTION_TAP_DANCE_DOUBLE(KC_G, KC_LEFT_CURLY_BRACE),
-    // Tap once for T, twice for {
-    [TD_H_RKB] = ACTION_TAP_DANCE_DOUBLE(KC_H, KC_RIGHT_CURLY_BRACE),
-    // Tap once for T, twice for {
-    [TD_B_LKB] = ACTION_TAP_DANCE_DOUBLE(KC_B, KC_LEFT_ANGLE_BRACKET),
-    // Tap once for T, twice for {
-    [TD_N_RKB] = ACTION_TAP_DANCE_DOUBLE(KC_N, KC_RIGHT_ANGLE_BRACKET),
-    // Tap once for T, twice for {
-    [TD_F_LKB] = ACTION_TAP_DANCE_DOUBLE(KC_F, KC_LEFT_PAREN),
-    // Tap once for T, twice for {
-    [TD_J_RKB] = ACTION_TAP_DANCE_DOUBLE(KC_J, KC_RIGHT_PAREN),
-
-};
-
 /** \brief Automatically enable sniping-mode on the pointer layer. */
 #define CHARYBDIS_AUTO_SNIPING_ON_LAYER LAYER_POINTER
 
@@ -83,39 +47,37 @@ static uint16_t auto_pointer_layer_timer = 0;
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [LAYER_BASE] = LAYOUT(
   // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
-       TD(TD_ESC_CAPS),     KC_Q,    KC_W,    KC_E,    KC_R,    KC_T, KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, KC_LBRC,
+       KC_LGUI,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, KC_RGUI,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       KC_LCTL, MT(MOD_LALT, KC_A), MT(MOD_LSFT, KC_S), MT(MOD_LGUI, KC_D), MT(MOD_LCTL, KC_F), TD(TD_G_LKB), TD(TD_H_RKB), MT(MOD_RCTL, KC_J), MT(MOD_RGUI, KC_K), MT(MOD_RSFT, KC_L), MT(MOD_LALT, KC_SCLN), KC_QUOT,
+       KC_LCTL,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,       KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, KC_RCTL,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       KC_LSFT,    PT_Z,    KC_X,    KC_C,    KC_V,    KC_B, KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, QK_LEADER,
+       KC_LSFT,    PT_Z,    KC_X,    KC_C,    KC_V,    KC_B,       KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_RSFT,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
-                                  KC_LCTL,  LOWER,   MT(MOD_LGUI,KC_ENT), KC_BSPC, LT(RAISE, KC_SPC)
+                                  KC_T, KC_T, KC_T, KC_T, KC_T
   //                            ╰───────────────────────────╯ ╰──────────────────╯
   ),
- 
+
   [LAYER_LOWER] = LAYOUT(
   // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
-       KC_TILDE, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,       KC_6,       KC_7,    KC_8,    KC_9, KC_0,    KC_F17,
+       XXXXXXX, RGB_TOG, KC_MNXT, KC_MPLY, KC_MPRV, XXXXXXX,    KC_LBRC,    KC_7,    KC_8,    KC_9, KC_RBRC, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       KC_GRAVE, KC_EXCLAIM, KC_AT, KC_HASH, KC_DOLLAR, KC_PERCENT, KC_CIRCUMFLEX, KC_AMPERSAND, KC_ASTERISK, KC_LEFT_PAREN, KC_RIGHT_PAREN, KC_F18,
+       XXXXXXX, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,    KC_PPLS,    KC_4,    KC_5,    KC_6, KC_PMNS, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       XXXXXXX, KC_PIPE, KC_UNDERSCORE, KC_PLUS, KC_BACKSLASH,  KC_F15,    KC_F16, KC_EQUAL, KC_MINS, XXXXXXX, KC_F8, KC_F14,
+       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, EE_CLR,  QK_BOOT,    KC_PAST,    KC_1,    KC_2,    KC_3, KC_PSLS, XXXXXXX,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
-                                  KC_LGUI, XXXXXXX, KC_LALT,    KC_LCTL, KC_LALT
+                                  XXXXXXX, XXXXXXX, _______,    XXXXXXX, _______
   //                            ╰───────────────────────────╯ ╰──────────────────╯
   ),
-
-
 
   [LAYER_RAISE] = LAYOUT(
   // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
-       KC_F1,   KC_F2,    KC_F3,    KC_F4,   KC_F5,   KC_F6,    KC_F7,   KC_F8,   KC_F9,   KC_F10,   KC_F11,   KC_F12,
+       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, KC_VOLU, KC_MUTE, KC_VOLD, XXXXXXX, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       XXXXXXX, KC_TAB, KC_PSCR, KC_UP, XXXXXXX, EE_CLR,       EE_CLR,  XXXXXXX,  KC_UP,  XXXXXXX, KC_VOLU, KC_VOLD,
+       XXXXXXX, KC_LEFT,   KC_UP, KC_DOWN, KC_RGHT, XXXXXXX,    XXXXXXX, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       XXXXXXX, XXXXXXX,   KC_LEFT, KC_DOWN,  KC_RGHT, QK_BOOT,  QK_BOOT, KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, KC_MUTE,
+       XXXXXXX, KC_HOME, KC_PGUP, KC_PGDN,  KC_END, XXXXXXX,    QK_BOOT, EE_CLR,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
-                                  KC_LCTL, KC_LSFT, KC_LALT,    _______, XXXXXXX
+                                  _______, _______, XXXXXXX,    _______, XXXXXXX
   //                            ╰───────────────────────────╯ ╰──────────────────╯
   ),
 
@@ -125,7 +87,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
        XXXXXXX, KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX,    XXXXXXX, KC_RSFT, KC_RCTL, KC_RALT, KC_RGUI, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       XXXXXXX, _______, KC_ACL0, KC_ACL1, KC_ACL2,  QK_BOOT,    QK_BOOT, EE_CLR,  SNIPING, DRGSCRL, _______, XXXXXXX,
+       XXXXXXX, _______, DRGSCRL, SNIPING, EE_CLR,  QK_BOOT,    QK_BOOT, EE_CLR,  SNIPING, DRGSCRL, _______, XXXXXXX,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
                                   KC_BTN2, KC_BTN1, KC_BTN3,    KC_BTN3, KC_BTN1
   //                            ╰───────────────────────────╯ ╰──────────────────╯
@@ -183,39 +145,4 @@ void shutdown_user(void) {
     rgb_matrix_set_color_all(RGB_RED);
     rgb_matrix_update_pwm_buffers();
 #endif // RGB_MATRIX_ENABLE
-}
-
-void leader_start_user(void) {
-    // Do something when the leader key is pressed
-}
-
-void leader_end_user(void) {
-    if (leader_sequence_one_key(KC_F)) {
-        // Leader, f => Types the below string
-        SEND_STRING("QMK is awesome.");
-    } else if (leader_sequence_two_keys(KC_D, KC_D)) {
-        // Leader, d, d => Ctrl+A, Ctrl+C
-        SEND_STRING(SS_LCTL("a") SS_LCTL("c"));
-    } else if (leader_sequence_three_keys(KC_D, KC_D, KC_S)) {
-        // Leader, d, d, s => Types the below string
-        SEND_STRING("https://start.duckduckgo.com\n");
-    } else if (leader_sequence_two_keys(KC_A, KC_S)) {
-        // Leader, a, s => GUI+S
-        tap_code16(LGUI(KC_S));
-    } else if (leader_sequence_one_key(KC_A)) {
-        SEND_STRING("https://t.me/ergosplits\n");
-    } else if (leader_sequence_one_key(KC_S)) {
-        SEND_STRING("{");
-    }
-}
-
-uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case LT(RAISE, KC_SPC):
-            return TAPPING_TERM + 1250;
-        case MT(MOD_LALT, KC_A):
-            return 400;
-        default:
-            return TAPPING_TERM;
-    }
 }

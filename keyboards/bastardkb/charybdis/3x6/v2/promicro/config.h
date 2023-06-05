@@ -1,6 +1,5 @@
 /*
- * Copyright 2021 Quentin LEBASTARD <qlebastard@gmail.com>
- * Copyright 2021 Charly Delay <charly@codesink.dev> (@0xcharly)
+ * Copyright 2022 Charly Delay <charly@codesink.dev> (@0xcharly)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,14 +17,23 @@
 
 #pragma once
 
-#define DIODE_DIRECTION ROW2COL
+// The pin connected to the data pin of the LEDs
+#define WS2812_DI_PIN D3
 
-/* Trackball angle adjustment. */
-#define ROTATIONAL_TRANSFORM_ANGLE -25
+// The number of LEDs connected
+#define RGB_MATRIX_LED_COUNT 42
+
+/* Key matrix configuration. */
+#define MATRIX_ROW_PINS \
+    { F7, C6, D4, B5 }
+#define MATRIX_COL_PINS \
+    { F6, F5, B6, D7, E6, B4 }
+
+/* Handedness. */
+#define MASTER_RIGHT
 
 /* RGB settings. */
-#ifdef RGB_MATRIX_ENABLE
-#    define RGB_MATRIX_LED_COUNT 42
-#    define RGB_MATRIX_SPLIT \
-        { 21, 21 }
-#endif
+#define RGB_DI_PIN D3
+
+/* PMW3360 settings. */
+#define POINTING_DEVICE_CS_PIN F4

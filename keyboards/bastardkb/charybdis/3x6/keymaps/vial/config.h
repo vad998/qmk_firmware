@@ -1,6 +1,5 @@
-/*
- * Copyright 2021 Quentin LEBASTARD <qlebastard@gmail.com>
- * Copyright 2021 Charly Delay <charly@codesink.dev> (@0xcharly)
+/**
+ * Copyright 2022 Charly Delay <charly@codesink.dev> (@0xcharly)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,17 +14,21 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 #pragma once
 
-#define DIODE_DIRECTION ROW2COL
+#ifdef VIA_ENABLE
+/* VIA configuration. */
+#    define DYNAMIC_KEYMAP_LAYER_COUNT 4
+#endif // VIA_ENABLE
 
-/* Trackball angle adjustment. */
-#define ROTATIONAL_TRANSFORM_ANGLE -25
+/* Disable unused features. */
+#define NO_ACTION_ONESHOT
 
-/* RGB settings. */
-#ifdef RGB_MATRIX_ENABLE
-#    define RGB_MATRIX_LED_COUNT 42
-#    define RGB_MATRIX_SPLIT \
-        { 21, 21 }
-#endif
+/* Charybdis-specific features. */
+
+#ifdef POINTING_DEVICE_ENABLE
+// Automatically enable the pointer layer when moving the trackball.  See also:
+// - `CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS`
+// - `CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD`
+// #define CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
+#endif // POINTING_DEVICE_ENABLE
