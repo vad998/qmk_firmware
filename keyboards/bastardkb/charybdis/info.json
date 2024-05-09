@@ -1,7 +1,7 @@
 {
     "rgb_matrix": {
         "animations": {
-            "cycle_left_right": true
+            "cycle_left_right": false
         },
         "default": {
             "speed": 32,
